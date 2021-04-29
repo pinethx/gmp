@@ -33,8 +33,8 @@ public class StudentDaoImplTest {
 	}
 
 	@Test
-	public void test05SelectStudentByNo() {
-		System.out.printf("%s()%n", "test05SelectStudentByNo");
+	public void test05selectStudentByclassNo() {
+		System.out.printf("%s()%n", "test05selectStudentByclassNo");
 		Student student = new Student(new ClassR(1));
 		List<Student> searchStudent = dao.selectStudentByclassNo(student);
 		Assert.assertNotNull(searchStudent);

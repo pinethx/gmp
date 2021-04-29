@@ -16,6 +16,7 @@ CREATE TABLE student (
 	stdno   INT         NOT NULL COMMENT '학번', -- 학번
 	stdname VARCHAR(10) NOT NULL COMMENT '이름', -- 이름
 	classno int		    NOT NULL COMMENT '분반' -- 분반
+	
 )
 COMMENT '학생';
 
@@ -46,6 +47,7 @@ CREATE TABLE score (
 	stdno    INT NOT NULL COMMENT '학번', -- 학번
 	subcode  INT NOT NULL COMMENT '과목코드', -- 과목코드
 	subscore INT NULL     COMMENT '과목점수' -- 과목점수
+	
 )
 COMMENT '점수';
 

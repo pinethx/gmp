@@ -1,22 +1,15 @@
 package gmp.dto;
 
-import java.util.List;
-
 public class Grade {
-	private Score no;
 	private Student std;
 	private ClassR classr;
-	private List<Score> grade;
+	private int kor;
+	private int eng;
+	private int math;
+	private int society;
+	private int sience;
 	private int sum;
 	private double avg;
-
-	public Score getNo() {
-		return no;
-	}
-
-	public void setNo(Score no) {
-		this.no = no;
-	}
 
 	public Student getStd() {
 		return std;
@@ -34,20 +27,44 @@ public class Grade {
 		this.classr = classr;
 	}
 
-	public List<Score> getGrade() {
-		return grade;
+	public int getKor() {
+		return kor;
 	}
 
-	public void setGrade(List<Score> grade) {
-		this.grade = grade;
+	public void setKor(int kor) {
+		this.kor = kor;
 	}
 
-	public double getAvg() {
-		return avg;
+	public int getEng() {
+		return eng;
 	}
 
-	public void setAvg(double avg) {
-		this.avg = avg;
+	public void setEng(int eng) {
+		this.eng = eng;
+	}
+
+	public int getMath() {
+		return math;
+	}
+
+	public void setMath(int math) {
+		this.math = math;
+	}
+
+	public int getSociety() {
+		return society;
+	}
+
+	public void setSociety(int society) {
+		this.society = society;
+	}
+
+	public int getSience() {
+		return sience;
+	}
+
+	public void setSience(int sience) {
+		this.sience = sience;
 	}
 
 	public int getSum() {
@@ -58,20 +75,37 @@ public class Grade {
 		this.sum = sum;
 	}
 
-	public Grade(Score no, Student std, ClassR classr, List<Score> grade, int sum, double avg) {
+	public double getAvg() {
+		return avg;
+	}
+
+	public void setAvg(double avg) {
+		this.avg = avg;
+	}
+
+	public Grade(Student std) {
 		super();
-		this.no = no;
+		this.std = std;
+	}
+
+	public Grade(Student std, ClassR classr, int kor, int eng, int math, int society, int sience, int sum,
+			double avg) {
+		super();
 		this.std = std;
 		this.classr = classr;
-		this.grade = grade;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+		this.society = society;
+		this.sience = sience;
 		this.sum = sum;
 		this.avg = avg;
 	}
 
 	@Override
 	public String toString() {
-		return "Grade [no=" + no + ", stdno=" + std + ", classrm=" + classr + ", grade="
-				+ grade + ", sum=" + sum + ", avg=" + avg + "]";
+		return "Grade [std=" + std + ", classr=" + classr + ", kor=" + kor + ", eng=" + eng + ", math="
+				+ math + ", society=" + society + ", sience=" + sience + ", sum=" + sum + ", avg=" + avg + "]";
 	}
 
 }

@@ -2,18 +2,27 @@ package gmp.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.List;
+import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import gmp.dto.ClassR;
+import gmp.dto.Subject;
+import gmp.service.ClassRService;
+import gmp.service.GradeService;
+import gmp.service.SubjectService;
+import gmp.ui.list.GradeTotalList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class ConfirmClassGradeFrame extends JFrame {
@@ -25,8 +34,25 @@ public class ConfirmClassGradeFrame extends JFrame {
 	private JTextField tFSoc;
 	private JTextField tFMath;
 	private JTextField tFAvg;
+	private DefaultComboBoxModel<Subject> model;
+	private DefaultComboBoxModel<ClassR> model2;
+	private GradeService service;
+	private SubjectService subservice;
+	private ClassRService clsservice;
+	private JPanel pTop;
+	private JPanel pBottom;
+	private GradeTotalList pMain;
+	private JLabel lblTitle;
+	private JPanel panel;
+	private JLabel lblSelect;
+	private JComboBox cbsub;
+	private JComboBox cbcls;
+	private JButton btn1;
 
 	public ConfirmClassGradeFrame() {
+		service = new GradeService();
+		subservice = new SubjectService();
+		clsservice = new ClassRService();
 		initialize();
 	}
 
@@ -39,33 +65,53 @@ public class ConfirmClassGradeFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JPanel pTop = new JPanel();
+		pTop = new JPanel();
 		contentPane.add(pTop, BorderLayout.NORTH);
 		pTop.setLayout(new GridLayout(0, 6, 0, 0));
 		
-		JLabel lblTitle = new JLabel("분반별성적확인");
+		lblTitle = new JLabel("분반별성적확인");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		pTop.add(lblTitle);
 		
-		JScrollBar sBClass = new JScrollBar();
-		sBClass.setMaximum(2);
-		sBClass.setOrientation(JScrollBar.HORIZONTAL);
-		pTop.add(sBClass);
+		cbcls = new JComboBox();
+		pTop.add(cbcls);
+
+		ClassR cls = new ClassR();
+		List<ClassR> clsList = clsservice.showClassRAll();
+
+		clsList.add(cls);
+		model2 = new DefaultComboBoxModel<>(new Vector<>(clsList));
+		cbcls.setModel(model2);
 		
-		JPanel panel = new JPanel();
+		cbcls.setSelectedIndex(-1);
+		
+		panel = new JPanel();
 		pTop.add(panel);
 		
-		JLabel lblSelect = new JLabel("과목명");
+		lblSelect = new JLabel("과목명");
 		lblSelect.setHorizontalAlignment(SwingConstants.RIGHT);
 		pTop.add(lblSelect);
 		
-		JComboBox comboBox = new JComboBox();
-		pTop.add(comboBox);
+		cbsub = new JComboBox();
+		pTop.add(cbsub);
 		
-		JButton btn1 = new JButton("정렬");
+		Subject sub = new Subject();
+		List<Subject> subList = subservice.showSubjectAll();
+
+		subList.add(sub);
+		model = new DefaultComboBoxModel<>(new Vector<>(subList));
+		cbsub.setModel(model);
+		
+		cbsub.setSelectedIndex(-1);
+		
+		btn1 = new JButton("정렬");
+		btn1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		pTop.add(btn1);
 		
-		JPanel pBottom = new JPanel();
+		pBottom = new JPanel();
 		contentPane.add(pBottom, BorderLayout.SOUTH);
 		pBottom.setLayout(new GridLayout(0, 7, 0, 0));
 		
@@ -97,11 +143,10 @@ public class ConfirmClassGradeFrame extends JFrame {
 		pBottom.add(tFAvg);
 		tFAvg.setColumns(10);
 		
-		JScrollPane sPCenter = new JScrollPane();
-		contentPane.add(sPCenter, BorderLayout.CENTER);
-		
-		JList list = new JList();
-		sPCenter.setViewportView(list);
+		pMain = new GradeTotalList();
+		contentPane.add(pMain, BorderLayout.CENTER);
+		pMain.setService(service);
+		pMain.loadData();
 	}
 
 }

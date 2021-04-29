@@ -14,6 +14,8 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import gmp.dto.ClassR;
+
 @SuppressWarnings("serial")
 public abstract class AbstractCustomList<T> extends JPanel {
 	protected JTable table;
@@ -31,6 +33,8 @@ public abstract class AbstractCustomList<T> extends JPanel {
 	}
 
 	protected abstract void initList();
+
+	protected abstract void initList2(ClassR cls);
 
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
@@ -106,9 +110,9 @@ public abstract class AbstractCustomList<T> extends JPanel {
 			tcm.getColumn(idx[i]).setCellRenderer(dtcr);
 		}
 	}
-	
+
 	protected abstract Object[] toArray(T t);
-	
+
 	class CustomTableModel extends DefaultTableModel {
 
 		public CustomTableModel(Object[][] data, Object[] columnNames) {

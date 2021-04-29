@@ -1,7 +1,10 @@
 package gmp.ui.list;
 
+import java.awt.Font;
+
 import javax.swing.SwingConstants;
 
+import gmp.dto.ClassR;
 import gmp.dto.Score;
 import gmp.service.ScoreService;
 import gmp.ui.exception.NotSelectedException;
@@ -9,7 +12,10 @@ import gmp.ui.exception.NotSelectedException;
 @SuppressWarnings("serial")
 public class ScoreList extends AbstractCustomList<Score> {
 	
-	public ScoreList() {}
+	public ScoreList() {
+		table.setFont(new Font("돋움", Font.PLAIN, 14));
+		table.setRowHeight(30);
+		}
 
 	private ScoreService service;
 
@@ -48,5 +54,9 @@ public class ScoreList extends AbstractCustomList<Score> {
 	@Override
 	protected Object[] toArray(Score t) {
 		return new Object[] {t.getNo(), t.getStdNo().getStdName(), t.getSubCode().getSubName(), t.getSubScore()};
+	}
+
+	@Override
+	protected void initList2(ClassR cls) {
 	}
 }

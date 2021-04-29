@@ -10,7 +10,9 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import gmp.dao.GradeDao;
+import gmp.dto.ClassR;
 import gmp.dto.Grade;
+import gmp.dto.Student;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GradeDaoImplTest {
@@ -28,8 +30,15 @@ public class GradeDaoImplTest {
 	}
 
 	@Test
-	public void test02SelectGradeByClassfromView() {
-		fail("Not yet implemented");
+	public void test02selectGradeByClassfromView() {
+		System.out.printf("%s()%n", "test01selectGradeByClassfromView");
+		ClassR clr = new ClassR(1);
+		List<Grade> gradeList = dao.selectGradeByClassfromView(clr);
+		Assert.assertNotNull(gradeList);
+
+		for (Grade t : gradeList) {
+			System.out.println(t);
+		}
 	}
 
 	@Test

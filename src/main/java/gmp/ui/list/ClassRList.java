@@ -5,11 +5,15 @@ import javax.swing.SwingConstants;
 import gmp.dto.ClassR;
 import gmp.service.ClassRService;
 import gmp.ui.exception.NotSelectedException;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class ClassRList extends AbstractCustomList<ClassR> {
 	
-	public ClassRList() {}
+	public ClassRList() {
+		table.setFont(new Font("돋움", Font.PLAIN, 14));
+		table.setRowHeight(30);
+		}
 	
 	private ClassRService service;
 
@@ -47,5 +51,9 @@ public class ClassRList extends AbstractCustomList<ClassR> {
 	@Override
 	protected Object[] toArray(ClassR t) {
 		return new Object[] {t.getClassNo(), t.getClassRm() };
+	}
+
+	@Override
+	protected void initList2(ClassR cls) {
 	}
 }

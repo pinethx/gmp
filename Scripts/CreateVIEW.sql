@@ -49,7 +49,7 @@ select sc.no
   from student s join score sc on s.stdno = sc.stdno join classr sr on s.classno = sr.classno join subject sb on sc.subcode = sb.subcode
  group by s.stdno;
 
-
+select stdno, stdname, classno, classrm, 국어, 영어, 수학, 사회, 과학, 합계, 평균 from vw_full_score where classno = 1;
 
 select * from vw_full_score;
 select sc.no

@@ -1,7 +1,10 @@
 package gmp.ui.list;
 
+import java.awt.Font;
+
 import javax.swing.SwingConstants;
 
+import gmp.dto.ClassR;
 import gmp.dto.Subject;
 import gmp.service.SubjectService;
 import gmp.ui.exception.NotSelectedException;
@@ -9,7 +12,10 @@ import gmp.ui.exception.NotSelectedException;
 @SuppressWarnings("serial")
 public class SubList extends AbstractCustomList<Subject> {
 	
-	public SubList() {}
+	public SubList() {
+		table.setFont(new Font("돋움", Font.PLAIN, 14));
+		table.setRowHeight(30);
+		}
 	
 	private SubjectService service;
 
@@ -47,5 +53,9 @@ public class SubList extends AbstractCustomList<Subject> {
 	@Override
 	protected Object[] toArray(Subject t) {
 		return new Object[] {t.getSubCode(), t.getSubName() };
+	}
+
+	@Override
+	protected void initList2(ClassR cls) {
 	}
 }

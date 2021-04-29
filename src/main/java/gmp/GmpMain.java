@@ -10,15 +10,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import gmp.service.GradeService;
+import gmp.ui.ConfirmClassGradeFrame;
 import gmp.ui.InsertInfo;
+import gmp.ui.list.GradeTotalList;
 
 @SuppressWarnings("serial")
 public class GmpMain extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnInfo;
-	private JButton btnViewClass;
-	private JButton btnViewAll;
+/*	private JButton btnViewClass;
+	private JButton btnViewAll; */
+	private GradeService service;
+	private JPanel pBottom;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -35,6 +40,7 @@ public class GmpMain extends JFrame {
 
 	public GmpMain() {
 		setTitle("성적관리프로그램");
+		service = new GradeService();
 		initialize();
 	}
 
@@ -46,11 +52,14 @@ public class GmpMain extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel pMain = new JPanel();
+		GradeTotalList pMain = new GradeTotalList();
+		pMain.setService(service);
+		pMain.loadData();
 		contentPane.add(pMain);
 		
 		JPanel pTop = new JPanel();
 		contentPane.add(pTop, BorderLayout.NORTH);
+		
 		
 		btnInfo = new JButton("입력정보관리");
 		btnInfo.addActionListener(new ActionListener() {
@@ -60,10 +69,12 @@ public class GmpMain extends JFrame {
 			}
 		});
 		pTop.add(btnInfo);
-		
+/*		
 		btnViewClass = new JButton("분반별성적확인");
 		btnViewClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ConfirmClassGradeFrame frame = new ConfirmClassGradeFrame();
+				frame.setVisible(true);
 			}
 		});
 		pTop.add(btnViewClass);
@@ -74,6 +85,9 @@ public class GmpMain extends JFrame {
 			}
 		});
 		pTop.add(btnViewAll);
+*/		
+		pBottom = new JPanel();
+		contentPane.add(pBottom, BorderLayout.SOUTH);
 	}
 
 }
