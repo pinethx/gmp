@@ -2,12 +2,16 @@ package gmp;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import gmp.service.GradeService;
@@ -25,6 +29,12 @@ public class GmpMain extends JFrame {
 	private JButton btnViewAll; 
 	private GradeService service;
 	private JPanel pBottom;
+	private JTextField tFKor;
+	private JTextField tFEng;
+	private JTextField tFSie;
+	private JTextField tFSoc;
+	private JTextField tFMath;
+	private JTextField tFAvg;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -88,9 +98,55 @@ public class GmpMain extends JFrame {
 			}
 		});
 		pTop.add(btnViewAll);
-		
+
 		pBottom = new JPanel();
 		contentPane.add(pBottom, BorderLayout.SOUTH);
+		pBottom.setLayout(new GridLayout(0, 7, 0, 0));
+		
+		JLabel lblAverage = new JLabel("과목별평균점수");
+		lblAverage.setHorizontalAlignment(SwingConstants.CENTER);
+		pBottom.add(lblAverage);
+
+		pMain = new GradeTotalList();
+		contentPane.add(pMain, BorderLayout.CENTER);
+		pMain.setService(service);
+		pMain.loadData();
+
+		tFKor = new JTextField();
+		pBottom.add(tFKor);
+		tFKor.setColumns(10);
+		tFKor.setText(String.format("%.1f", pMain.getKoravg()));
+		tFKor.setEditable(false);
+		
+		tFEng = new JTextField();
+		pBottom.add(tFEng);
+		tFEng.setColumns(10);
+		tFEng.setText(String.format("%.1f", pMain.getEngavg()));
+		tFEng.setEditable(false);
+		
+		tFMath = new JTextField();
+		pBottom.add(tFMath);
+		tFMath.setColumns(10);
+		tFMath.setText(String.format("%.1f", pMain.getMathavg()));
+		tFMath.setEditable(false);
+		
+		tFSoc = new JTextField();
+		pBottom.add(tFSoc);
+		tFSoc.setColumns(10);
+		tFSoc.setText(String.format("%.1f", pMain.getSocavg()));
+		tFSoc.setEditable(false);
+		
+		tFSie = new JTextField();
+		pBottom.add(tFSie);
+		tFSie.setColumns(10);
+		tFSie.setText(String.format("%.1f", pMain.getSieavg()));
+		tFSie.setEditable(false);
+		
+		tFAvg = new JTextField();
+		pBottom.add(tFAvg);
+		tFAvg.setColumns(10);
+		tFAvg.setText(String.format("%.1f", pMain.getAvgAvg()));
+		tFAvg.setEditable(false);
 	}
 
 }

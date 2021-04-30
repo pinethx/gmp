@@ -2,6 +2,8 @@ package gmp.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
@@ -16,13 +18,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import gmp.dto.ClassR;
+import gmp.dto.Grade;
 import gmp.dto.Subject;
 import gmp.service.ClassRService;
 import gmp.service.GradeService;
 import gmp.service.SubjectService;
 import gmp.ui.list.GradeTotalList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class ConfirmClassGradeFrame extends JFrame {
@@ -59,7 +60,7 @@ public class ConfirmClassGradeFrame extends JFrame {
 	private void initialize() {
 		setTitle("분반별성적확인");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 600, 450);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -118,35 +119,47 @@ public class ConfirmClassGradeFrame extends JFrame {
 		JLabel lblAverage = new JLabel("과목별평균점수");
 		lblAverage.setHorizontalAlignment(SwingConstants.CENTER);
 		pBottom.add(lblAverage);
-		
-		tFKor = new JTextField();
-		pBottom.add(tFKor);
-		tFKor.setColumns(10);
-		
-		tFEng = new JTextField();
-		pBottom.add(tFEng);
-		tFEng.setColumns(10);
-		
-		tFMath = new JTextField();
-		pBottom.add(tFMath);
-		tFMath.setColumns(10);
-		
-		tFSoc = new JTextField();
-		pBottom.add(tFSoc);
-		tFSoc.setColumns(10);
-		
-		tFSie = new JTextField();
-		pBottom.add(tFSie);
-		tFSie.setColumns(10);
-		
-		tFAvg = new JTextField();
-		pBottom.add(tFAvg);
-		tFAvg.setColumns(10);
-		
+
 		pMain = new GradeTotalList();
 		contentPane.add(pMain, BorderLayout.CENTER);
 		pMain.setService(service);
 		pMain.loadData();
+		
+		tFKor = new JTextField();
+		pBottom.add(tFKor);
+		tFKor.setColumns(10);
+		tFKor.setText(String.format("%.1f", pMain.getKoravg()));
+		tFKor.setEditable(false);
+		
+		tFEng = new JTextField();
+		pBottom.add(tFEng);
+		tFEng.setColumns(10);
+		tFEng.setText(String.format("%.1f", pMain.getEngavg()));
+		tFEng.setEditable(false);
+		
+		tFMath = new JTextField();
+		pBottom.add(tFMath);
+		tFMath.setColumns(10);
+		tFMath.setText(String.format("%.1f", pMain.getMathavg()));
+		tFMath.setEditable(false);
+		
+		tFSoc = new JTextField();
+		pBottom.add(tFSoc);
+		tFSoc.setColumns(10);
+		tFSoc.setText(String.format("%.1f", pMain.getSocavg()));
+		tFSoc.setEditable(false);
+		
+		tFSie = new JTextField();
+		pBottom.add(tFSie);
+		tFSie.setColumns(10);
+		tFSie.setText(String.format("%.1f", pMain.getSieavg()));
+		tFSie.setEditable(false);
+		
+		tFAvg = new JTextField();
+		pBottom.add(tFAvg);
+		tFAvg.setColumns(10);
+		tFAvg.setText(String.format("%.1f", pMain.getAvgAvg()));
+		tFAvg.setEditable(false);
 	}
 
 }

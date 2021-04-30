@@ -37,22 +37,19 @@ public class ConfirmAllGradeFrame extends JFrame {
 	private JTextField tFSie;
 	private GradeTotalList pMain;
 	private DefaultComboBoxModel<Subject> model;
-	private DefaultComboBoxModel<ClassR> model2;
 	private GradeService service;
 	private SubjectService subservice;
-	private ClassRService clsservice;
 
 	public ConfirmAllGradeFrame() {
 		service = new GradeService();
 		subservice = new SubjectService();
-		clsservice = new ClassRService();
 		initialize();
 	}
 
 	private void initialize() {
 		setTitle("전체 성적 확인");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 600, 450);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -91,47 +88,56 @@ public class ConfirmAllGradeFrame extends JFrame {
 		model = new DefaultComboBoxModel<>(new Vector<>(subList));
 		cmbSub.setModel(model);
 		
-		JButton btnConfirm = new JButton("조회");
+		JButton btnConfirm = new JButton("정렬");
 		panel.add(btnConfirm);
 		
 		JPanel pBottom = new JPanel();
 		contentPane.add(pBottom, BorderLayout.SOUTH);
-		pBottom.setLayout(new GridLayout(0, 8, 0, 0));
+		pBottom.setLayout(new GridLayout(0, 7, 0, 0));
 		
 		JLabel lblAvg = new JLabel("과목별 평균 점수");
 		pBottom.add(lblAvg);
-		
-		JPanel panel_3 = new JPanel();
-		pBottom.add(panel_3);
-		
-		tFKor = new JTextField();
-		pBottom.add(tFKor);
-		tFKor.setColumns(10);
-		
-		tFEng = new JTextField();
-		pBottom.add(tFEng);
-		tFEng.setColumns(10);
-		
-		tFMath = new JTextField();
-		pBottom.add(tFMath);
-		tFMath.setColumns(10);
-		
-		tFSoc = new JTextField();
-		pBottom.add(tFSoc);
-		tFSoc.setColumns(10);
-		
-		tFSie = new JTextField();
-		pBottom.add(tFSie);
-		tFSie.setColumns(10);
-		
-		tFAvg = new JTextField();
-		pBottom.add(tFAvg);
-		tFAvg.setColumns(10);
 
 		pMain = new GradeTotalList();
 		contentPane.add(pMain, BorderLayout.CENTER);
 		pMain.setService(service);
 		pMain.loadData();
+
+		tFKor = new JTextField();
+		pBottom.add(tFKor);
+		tFKor.setColumns(10);
+		tFKor.setText(String.format("%.1f", pMain.getKoravg()));
+		tFKor.setEditable(false);
+		
+		tFEng = new JTextField();
+		pBottom.add(tFEng);
+		tFEng.setColumns(10);
+		tFEng.setText(String.format("%.1f", pMain.getEngavg()));
+		tFEng.setEditable(false);
+		
+		tFMath = new JTextField();
+		pBottom.add(tFMath);
+		tFMath.setColumns(10);
+		tFMath.setText(String.format("%.1f", pMain.getMathavg()));
+		tFMath.setEditable(false);
+		
+		tFSoc = new JTextField();
+		pBottom.add(tFSoc);
+		tFSoc.setColumns(10);
+		tFSoc.setText(String.format("%.1f", pMain.getSocavg()));
+		tFSoc.setEditable(false);
+		
+		tFSie = new JTextField();
+		pBottom.add(tFSie);
+		tFSie.setColumns(10);
+		tFSie.setText(String.format("%.1f", pMain.getSieavg()));
+		tFSie.setEditable(false);
+		
+		tFAvg = new JTextField();
+		pBottom.add(tFAvg);
+		tFAvg.setColumns(10);
+		tFAvg.setText(String.format("%.1f", pMain.getAvgAvg()));
+		tFAvg.setEditable(false);
 	}
 
 }
