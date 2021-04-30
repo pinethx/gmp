@@ -18,6 +18,7 @@ public class InsertInfo extends JFrame {
 	private JPanel contentPane;
 		
 	public InsertInfo() {
+		setTitle("입력 정보 관리");
 		initialize();
 	}
 

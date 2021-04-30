@@ -2,7 +2,10 @@ package gmp.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.List;
+import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,6 +16,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import gmp.dto.ClassR;
+import gmp.dto.Subject;
+import gmp.service.ClassRService;
+import gmp.service.GradeService;
+import gmp.service.SubjectService;
+import gmp.ui.list.GradeTotalList;
 
 @SuppressWarnings("serial")
 public class ConfirmAllGradeFrame extends JFrame {
@@ -25,8 +35,17 @@ public class ConfirmAllGradeFrame extends JFrame {
 	private JTextField tFSoc;
 	private JTextField tFAvg;
 	private JTextField tFSie;
+	private GradeTotalList pMain;
+	private DefaultComboBoxModel<Subject> model;
+	private DefaultComboBoxModel<ClassR> model2;
+	private GradeService service;
+	private SubjectService subservice;
+	private ClassRService clsservice;
 
 	public ConfirmAllGradeFrame() {
+		service = new GradeService();
+		subservice = new SubjectService();
+		clsservice = new ClassRService();
 		initialize();
 	}
 
@@ -65,48 +84,54 @@ public class ConfirmAllGradeFrame extends JFrame {
 		JComboBox cmbSub = new JComboBox();
 		panel.add(cmbSub);
 		
+		Subject sub = new Subject();
+		List<Subject> subList = subservice.showSubjectAll();
+
+		subList.add(sub);
+		model = new DefaultComboBoxModel<>(new Vector<>(subList));
+		cmbSub.setModel(model);
+		
 		JButton btnConfirm = new JButton("조회");
 		panel.add(btnConfirm);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.SOUTH);
-		panel_1.setLayout(new GridLayout(0, 8, 0, 0));
+		JPanel pBottom = new JPanel();
+		contentPane.add(pBottom, BorderLayout.SOUTH);
+		pBottom.setLayout(new GridLayout(0, 8, 0, 0));
 		
 		JLabel lblAvg = new JLabel("과목별 평균 점수");
-		panel_1.add(lblAvg);
+		pBottom.add(lblAvg);
 		
 		JPanel panel_3 = new JPanel();
-		panel_1.add(panel_3);
+		pBottom.add(panel_3);
 		
 		tFKor = new JTextField();
-		panel_1.add(tFKor);
+		pBottom.add(tFKor);
 		tFKor.setColumns(10);
 		
 		tFEng = new JTextField();
-		panel_1.add(tFEng);
+		pBottom.add(tFEng);
 		tFEng.setColumns(10);
 		
 		tFMath = new JTextField();
-		panel_1.add(tFMath);
+		pBottom.add(tFMath);
 		tFMath.setColumns(10);
 		
 		tFSoc = new JTextField();
-		panel_1.add(tFSoc);
+		pBottom.add(tFSoc);
 		tFSoc.setColumns(10);
 		
 		tFSie = new JTextField();
-		panel_1.add(tFSie);
+		pBottom.add(tFSie);
 		tFSie.setColumns(10);
 		
 		tFAvg = new JTextField();
-		panel_1.add(tFAvg);
+		pBottom.add(tFAvg);
 		tFAvg.setColumns(10);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-		JList list = new JList();
-		scrollPane.setViewportView(list);
+
+		pMain = new GradeTotalList();
+		contentPane.add(pMain, BorderLayout.CENTER);
+		pMain.setService(service);
+		pMain.loadData();
 	}
 
 }

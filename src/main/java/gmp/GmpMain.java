@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gmp.service.GradeService;
+import gmp.ui.ConfirmAllGradeFrame;
 import gmp.ui.ConfirmClassGradeFrame;
 import gmp.ui.InsertInfo;
 import gmp.ui.list.GradeTotalList;
@@ -20,8 +21,8 @@ public class GmpMain extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnInfo;
-/*	private JButton btnViewClass;
-	private JButton btnViewAll; */
+	private JButton btnViewClass;
+	private JButton btnViewAll; 
 	private GradeService service;
 	private JPanel pBottom;
 
@@ -69,7 +70,7 @@ public class GmpMain extends JFrame {
 			}
 		});
 		pTop.add(btnInfo);
-/*		
+		
 		btnViewClass = new JButton("분반별성적확인");
 		btnViewClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,10 +83,12 @@ public class GmpMain extends JFrame {
 		btnViewAll = new JButton("전체성적확인");
 		btnViewAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ConfirmAllGradeFrame frame = new ConfirmAllGradeFrame();
+				frame.setVisible(true);
 			}
 		});
 		pTop.add(btnViewAll);
-*/		
+		
 		pBottom = new JPanel();
 		contentPane.add(pBottom, BorderLayout.SOUTH);
 	}
